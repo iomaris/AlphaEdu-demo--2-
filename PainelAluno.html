@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaEdu - Painel</title>
+  <script src="js/lucide.min.js"></script>
+  <link rel="stylesheet" href="css/stylePainel.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+<!-- Sidebar (sem alterações ) -->
+<div class="sidebar">
+  <div class="sidebar-main-navigation">
+    <div class="sidebar-header">
+      <button id="toggle-sidebar-btn"><i data-lucide="menu"></i></button>
+    </div>
+    <nav>
+      <a href="PainelAluno.html" class="active"><i data-lucide="layout-dashboard"></i> <span>Painel</span></a>
+      <a href="cronometro.html"><i data-lucide="timer"></i> <span>Cronômetro</span></a>
+      <a href="calendario.html"><i data-lucide="calendar"></i> <span>Calendário</span></a>
+      <a href="bloco_de_notas.html"><i data-lucide="notebook-pen"></i> <span>Bloco de Notas</span></a>
+      <a href="arquivos.html" ><i data-lucide="folder-archive"></i> <span>Meus Arquivos</span></a>
+      <a href="colecao.html"><i data-lucide="layers"></i> <span>Flashcards</span></a>
+    </nav>
+  </div>
+  <div id="profile-menu-container" class="sidebar-bottom-menu">
+    <button id="profile-menu-button" class="profile-button">
+      <span class="profile-avatar"></span>
+      <div class="profile-info">
+        <span class="username">Carregando...</span>
+        <span class="email"></span>
+      </div>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown-sidebar">
+      <div class="dropdown-header"><span class="username"></span><span class="email"></span></div>
+      <a href="perfil.html" class="dropdown-item"><i data-lucide="user-cog"></i><span>Editar Perfil</span></a>
+      <a href="configuracao.html" class="dropdown-item"><i data-lucide="settings"></i><span>Configurações</span></a>
+      <div class="dropdown-divider"></div>
+      <a href="#" id="leave-class-btn" class="dropdown-item" style="color: #f59e0b; display: none;"><i data-lucide="user-x"></i><span>Sair da Turma</span></a>
+      <a href="index.html" class="dropdown-item logout"><i data-lucide="log-out"></i><span>Sair</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- Conteúdo Principal -->
+<div class="main">
+  <header class="main-header">
+    <div class="header-text">
+        <h1 id="welcome-message">Bem-vindo(a) de volta!</h1>
+        <p>Este é o seu centro de controle. Acompanhe seus avisos, atividades e progresso.</p>
+    </div>
+  </header>
+
+  <!-- ================================================== -->
+  <!-- ===== ESTRUTURA DO GRID RESTAURADA E CORRIGIDA ===== -->
+  <!-- ================================================== -->
+  <div class="dashboard-grid">
+    
+    <div id="class-panel" class="grid-item notices-container" style="display: none;">
+      <div class="card-header"><i data-lucide="megaphone"></i><h3>Avisos Importantes</h3></div>
+      <div class="notice-list"></div>
+    </div>
+
+    <!-- A .right-column VOLTOU a existir -->
+    <div class="right-column">
+      <div class="grid-item upcoming-activities">
+        <div class="card-header"><i data-lucide="calendar-clock"></i><h3>Atividades Próximas</h3></div>
+        <div class="mini-calendar">
+          <div class="mini-calendar-header"><button id="mini-prev-month"><i data-lucide="chevron-left"></i></button><span id="mini-month-year"></span><button id="mini-next-month"><i data-lucide="chevron-right"></i></button></div>
+          <div class="mini-calendar-weekdays"><span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span></div>
+          <div class="mini-calendar-days" id="mini-calendar-days"></div>
+        </div>
+        <a href="calendario.html" class="view-all-btn">Ver todas as atividades</a>
+      </div>
+      
+      <div id="notepad-preview" class="grid-item">
+        <div class="card-header"><i data-lucide="notebook-pen"></i><h3>Últimas Notas</h3></div>
+        <div id="mini-notes-list" class="mini-notes-list"></div>
+        <a href="bloco_de_notas.html" class="view-all-btn">Ver todas as notas</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modais e FAB (sem alterações) -->
+<div id="joinClassModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4>Participar de uma Turma</h4>
+      <button id="closeJoinModalBtn" class="close-btn">&times;</button>
+    </div>
+    <form id="joinClassForm">
+      <p>Insira o código da turma para ver os avisos e o calendário compartilhado.</p>
+      <div class="form-group">
+        <label for="class-code-input">Código da turma</label>
+        <input type="text" id="class-code-input" placeholder="Digite o código aqui" required>
+      </div>
+      <div class="modal-actions"><button type="submit" class="btn-save">Participar</button></div>
+    </form>
+  </div>
+</div>
+<button id="openJoinModalBtn" class="fab" style="display: none;"><i data-lucide="users"></i></button>
+
+<div id="custom-modal-overlay" class="custom-modal-overlay">
+  <div class="custom-modal">
+    <h3 id="custom-modal-title"></h3>
+    <p id="custom-modal-text"></p>
+    <div id="custom-modal-buttons" class="custom-modal-buttons">
+      <button id="custom-modal-cancel-btn" class="btn-secondary">Cancelar</button>
+      <button id="custom-modal-ok-btn" class="btn-primary">OK</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/scriptPainel.js"></script>
+
+<div class="demo-badge" role="note">Demonstração: os dados ficam só neste navegador
+  <a href="PainelProfessor.html" style="color:#fff">Ver como professor</a>
+  <button type="button" onclick="localStorage.removeItem('alphaedu-demo-db-v1');location.reload()">Recomeçar</button>
+</div>
+</body>
+</html>

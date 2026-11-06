@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaEdu - Flashcards</title>
+  <script src="js/lucide.min.js"></script>
+  <link rel="stylesheet" href="css/styleFlashCard.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+<!-- ===== NOVA SIDEBAR (PADRÃO DO PROJETO ) ===== -->
+<div class="sidebar">
+  <div class="sidebar-main-navigation">
+    <div class="sidebar-header">
+      <button id="toggle-sidebar-btn"><i data-lucide="menu"></i></button>
+    </div>
+    <nav>
+      <a href="PainelAluno.html"><i data-lucide="layout-dashboard"></i> <span>Painel</span></a>
+      <a href="cronometro.html"><i data-lucide="timer"></i> <span>Cronômetro</span></a>
+      <a href="calendario.html"><i data-lucide="calendar"></i> <span>Calendário</span></a>
+      <a href="bloco_de_notas.html"><i data-lucide="notebook-pen"></i> <span>Bloco de Notas</span></a>
+      <a href="arquivos.html"><i data-lucide="folder-archive"></i> <span>Meus Arquivos</span></a>
+      <a href="colecao.html" class="active"><i data-lucide="layers"></i> <span>Flashcards</span></a>
+    </nav>
+  </div>
+  <div id="profile-menu-container" class="sidebar-bottom-menu">
+    <button id="profile-menu-button" class="profile-button">
+      <span class="profile-avatar"></span>
+      <div class="profile-info">
+        <span class="username">Carregando...</span>
+        <span class="email"></span>
+      </div>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown-sidebar">
+      <div class="dropdown-header"><span class="username"></span><span class="email"></span></div>
+      <a href="perfil.html" class="dropdown-item"><i data-lucide="user-cog"></i><span>Editar Perfil</span></a>
+      <a href="configuracao.html" class="dropdown-item"><i data-lucide="settings"></i><span>Configurações</span></a>
+      <div class="dropdown-divider"></div>
+      <a href="#" id="leave-class-btn" class="dropdown-item" style="color: #f59e0b; display: none;"><i data-lucide="user-x"></i><span>Sair da Turma</span></a>
+      <a href="index.html" class="dropdown-item logout"><i data-lucide="log-out"></i><span>Sair</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- Conteúdo Principal -->
+<div class="main">
+  <header class="main-header">
+    <h1 id="collection-title">Carregando coleção...</h1>
+    <p id="collection-description">Revise os flashcards para um aprendizado interativo e eficaz.</p>
+  </header>
+
+  <div class="panel">
+    <div class="toolbar">
+      <a href="colecao.html" class="back-btn"><i data-lucide="arrow-left"></i> Voltar para Coleções</a>
+      <button class="btn-primary" id="add-card-btn"><i data-lucide="plus"></i> Novo Flashcard</button>
+    </div>
+
+    <div class="flashcard-container">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-face flashcard-front" id="card-front"></div>
+        <div class="flashcard-face flashcard-back" id="card-back"></div>
+      </div>
+    </div>
+
+    <div class="tags" id="tags"></div>
+    <div class="counter" id="counter"></div>
+
+    <!-- Encontre este bloco de código -->
+<div class="controls">
+  <button class="btn" id="prev"><i data-lucide="arrow-left"></i> Anterior</button>
+  <button class="btn" id="shuffle"><i data-lucide="shuffle"></i> Embaralhar</button>
+  <button class="btn" id="edit"><i data-lucide="edit"></i> Editar</button>
+  <button class="btn" id="delete"><i data-lucide="trash-2"></i> Excluir</button>
+  <button class="btn" id="next">Próximo <i data-lucide="arrow-right"></i></button>
+</div>
+
+  </div>
+</div>
+
+<!-- Modal de Criar/Editar Flashcard -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+        <h4 id="modal-title">Novo Flashcard</h4>
+        <button id="close-modal-btn" class="close-btn">&times;</button>
+    </div>
+    <form id="card-form">
+        <div class="form-group">
+            <label for="modal-pergunta">Pergunta</label>
+            <input type="text" id="modal-pergunta" placeholder="Digite a pergunta aqui..." required>
+        </div>
+        <div class="form-group">
+            <label for="modal-resposta">Resposta</label>
+            <textarea id="modal-resposta" rows="4" placeholder="Digite a resposta aqui..." required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="modal-tags">Tags (separadas por vírgula)</label>
+            <input type="text" id="modal-tags" placeholder="Ex: geografia, história, química">
+        </div>
+        <div class="modal-actions">
+            <button type="button" id="cancel" class="btn-secondary">Cancelar</button>
+            <button type="submit" id="save" class="btn-save">Criar Flashcard</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de Confirmação de Exclusão -->
+<div id="confirm-delete-modal" class="modal">
+  <div class="modal-content" style="max-width: 450px;">
+    <div class="modal-header">
+      <h4>Confirmar Exclusão</h4>
+      <button id="close-confirm-modal-btn" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <i data-lucide="alert-triangle" class="confirm-icon"></i>
+      <p id="confirm-modal-text">Você tem certeza que deseja excluir este item? Esta ação não pode ser desfeita.</p>
+    </div>
+    <div class="modal-actions">
+      <button type="button" id="cancel-delete-btn" class="btn-secondary">Cancelar</button>
+      <button type="button" id="confirm-delete-btn" class="btn-danger">Sim, Excluir</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/scriptFlashCard.js"></script>
+
+<div class="demo-badge" role="note">Demonstração: os dados ficam só neste navegador
+  <a href="PainelProfessor.html" style="color:#fff">Ver como professor</a>
+  <button type="button" onclick="localStorage.removeItem('alphaedu-demo-db-v1');location.reload()">Recomeçar</button>
+</div>
+</body>
+</html>

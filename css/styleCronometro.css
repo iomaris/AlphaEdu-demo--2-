@@ -1,0 +1,435 @@
+/* ================================================== */
+/* ===== CSS CORRIGIDO E FINAL: styleCronometro.css ===== */
+/* ================================================== */
+
+/* --- 1. VARIÁVEIS GLOBAIS E RESET --- */
+:root {
+  --bg-dark: #EDF0EA;
+  --bg-panel: #FFFFFF;
+  --primary-blue: #1D5C4A;
+  --blue-light: #2A7560;
+  --blue-glow: #1D5C4A;
+  --text-light: #1B2A25;
+  --text-muted: #5D6C66;
+  --white: #FFFFFF;
+  --accent: #2A7560;
+  --success: #2E8B57;
+  --danger: #C2412D;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background: radial-gradient(circle at top left, #EDF0EA, var(--bg-dark) 70%);
+  color: var(--text-light);
+  overflow: hidden;
+}
+
+i[data-lucide] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* --- 2. SIDEBAR (ESTILOS DO PAINEL) --- */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #F7F8F5, #EDF0EA);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border-right: 1px solid rgba(29, 92, 74, 0.105);
+  z-index: 100;
+  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
+  flex-shrink: 0;
+  position: fixed; /* Garante que a sidebar fique fixa */
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 45px;
+  margin-bottom: 25px;
+}
+
+#toggle-sidebar-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  transition: all 0.2s;
+}
+
+#toggle-sidebar-btn:hover {
+  color: var(--text-light);
+  background: rgba(29, 92, 74, 0.105);
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.sidebar nav a:hover {
+  background: var(--bg-panel);
+  color: var(--text-light);
+}
+
+.sidebar nav a.active {
+  background: var(--primary-blue);
+  color: var(--white);
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(29, 92, 74, 0.21);
+}
+
+/* --- 3. ESTADO DA SIDEBAR FECHADA --- */
+.sidebar.hidden {
+  width: 88px;
+  padding: 20px 15px;
+}
+
+.sidebar.hidden .sidebar-header {
+  justify-content: center;
+}
+
+.sidebar.hidden nav a span,
+.sidebar.hidden .profile-info {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  margin-left: -15px;
+}
+
+.sidebar.hidden nav a {
+  justify-content: center;
+  padding: 14px;
+}
+
+.sidebar.hidden .profile-button {
+  justify-content: center;
+}
+
+/* --- 4. MENU DE PERFIL --- */
+.sidebar-bottom-menu {
+  border-top: 1px solid rgba(29, 92, 74, 0.105);
+  padding-top: 15px;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+  transition: background 0.3s;
+  overflow: hidden;
+}
+
+.profile-button:hover {
+  background: var(--bg-panel);
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--blue-light);
+  color: var(--bg-dark);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.profile-info .username {
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 15px;
+}
+
+.profile-info .email {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.profile-dropdown-sidebar {
+  position: absolute;
+  bottom: 80px;
+  left: 15px;
+  width: 230px;
+  background: #F4F6F1;
+  border-radius: 12px;
+  border: 1px solid rgba(29, 92, 74, 0.21);
+  box-shadow: 0 10px 30px rgba(27, 42, 37, 0.15);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 110;
+}
+
+.profile-dropdown-sidebar.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-header { padding: 12px; border-bottom: 1px solid rgba(29, 92, 74, 0.14); margin-bottom: 8px; }
+.dropdown-header .username { display: block; font-weight: 600; color: var(--text-light); }
+.dropdown-header .email { display: block; font-size: 12px; color: var(--text-muted); }
+.dropdown-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 6px; text-decoration: none; color: var(--text-light); font-size: 14px; transition: background 0.2s; }
+.dropdown-item:hover { background: rgba(29, 92, 74, 0.105); color: var(--blue-light); }
+.dropdown-item.logout, .dropdown-item[style*="color: #f59e0b"] { color: var(--danger); }
+.dropdown-item.logout:hover, .dropdown-item[style*="color: #f59e0b"]:hover { background: rgba(194, 65, 45, 0.15); color: var(--danger); }
+.dropdown-divider { height: 1px; background: rgba(29, 92, 74, 0.14); margin: 8px 0; }
+
+/* --- 5. CONTEÚDO PRINCIPAL (MAIN) --- */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  gap: 30px;
+  height: 100vh;
+  overflow-y: auto;
+  /* A transição agora é na margem, que é controlada pelo JS */
+  transition: margin-left 0.3s ease-in-out;
+  /* Garante que o conteúdo não fique por baixo da sidebar fixa */
+  margin-left: 260px; 
+}
+
+/* ===== PONTO CRÍTICO DA CORREÇÃO ===== */
+.main-header {
+  /* Alinha o texto à esquerda DENTRO do cabeçalho */
+  text-align: left;
+  /* Define a mesma largura máxima do painel para manter o alinhamento */
+  max-width: 800px;
+  /* Centraliza o próprio bloco do cabeçalho, assim como o painel */
+  margin-left: auto;
+  margin-right: auto;
+  /* Garante que o cabeçalho ocupe a largura necessária */
+  width: 100%;
+}
+/* ===================================== */
+
+.main-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--blue-glow);
+  text-shadow: 0 0 12px rgba(29, 92, 74, 0.49);
+}
+
+.main-header p {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* --- 6. ESTILOS ESPECÍFICOS DO CRONÔMETRO --- */
+.panel {
+  background: var(--bg-panel);
+  border-radius: 16px;
+  border: 1px solid rgba(29, 92, 74, 0.14);
+  box-shadow: 0 0 15px rgba(29, 92, 74, 0.105);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* O restante do CSS permanece o mesmo... */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  background: var(--bg-dark);
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(29, 92, 74, 0.14);
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  transition: all 0.3s;
+}
+
+.tabs button.active {
+  background: var(--primary-blue);
+  color: var(--white);
+  box-shadow: 0 0 15px rgba(29, 92, 74, 0.42);
+}
+
+.tab-content { display: none; flex-direction: column; align-items: center; width: 100%; }
+.tab-content.active { display: flex; }
+
+.timer-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.time-card {
+  background: var(--bg-dark);
+  border: 1px solid rgba(29, 92, 74, 0.14);
+  color: var(--blue-glow);
+  font-size: 4rem;
+  font-weight: 700;
+  padding: 20px 30px;
+  border-radius: 12px;
+  min-width: 100px;
+  text-align: center;
+  user-select: none;
+  text-shadow: 0 0 10px var(--blue-glow);
+}
+
+.time-separator {
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.controls button {
+  background: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.controls button:hover {
+  background: var(--blue-light);
+  box-shadow: 0 0 12px var(--blue-light);
+}
+
+.input-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+
+.input-row input[type="number"] {
+  width: 120px;
+  padding: 10px 12px;
+  border: 1px solid rgba(29, 92, 74, 0.21);
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #F4F6F1;
+  color: var(--text-light);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-row input:focus {
+  outline: none;
+  border-color: var(--blue-light);
+  box-shadow: 0 0 10px rgba(29, 92, 74, 0.35);
+}
+
+.settings {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 500px;
+  border-top: 1px solid rgba(29, 92, 74, 0.14);
+  padding-top: 30px;
+  text-align: center;
+}
+
+.settings h4 {
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--blue-light);
+}
+
+.settings-row { display: flex; justify-content: center; align-items: center; gap: 10px; }
+.settings-row label { font-size: 14px; color: var(--text-muted); }
+
+.settings-row button {
+  background: var(--success);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.settings-row button:hover {
+  background: #2fda72;
+  box-shadow: 0 0 12px var(--success);
+}
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 980px) {
+  body { flex-direction: column; overflow: auto; }
+  .sidebar { position: static; width: 100%; height: auto; flex-direction: row; align-items: center; }
+  .sidebar-main-navigation { display: flex; align-items: center; justify-content: space-between; flex-grow: 1; }
+  .sidebar-main-navigation nav { display: flex; flex-direction: row; }
+  .sidebar-bottom-menu { border-top: none; padding-top: 0; flex-direction: row; }
+  .main { margin-left: 0; }
+}
+@media (max-width: 480px) {
+  .sidebar { flex-direction: column; align-items: stretch; }
+  .sidebar-main-navigation nav { flex-direction: column; }
+  .sidebar-bottom-menu { flex-direction: column; border-top: 1px solid var(--panel-border); padding-top: 12px; }
+}

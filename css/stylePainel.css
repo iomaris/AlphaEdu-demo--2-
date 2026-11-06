@@ -1,0 +1,779 @@
+/* ================================================== */
+/* ===== CSS FINAL, COMPLETO E CORRIGIDO ===== */
+/* ================================================== */
+
+:root {
+  --bg-dark: #EDF0EA;
+  --bg-panel: #FFFFFF;
+  --primary-blue: #1D5C4A;
+  --blue-light: #2A7560;
+  --blue-glow: #1D5C4A;
+  --text-light: #1B2A25;
+  --text-muted: #5D6C66;
+  --white: #FFFFFF;
+  --accent: #2A7560;
+  --danger: #C2412D;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background: radial-gradient(circle at top left, #EDF0EA, var(--bg-dark) 70%);
+  color: var(--text-light);
+  overflow: hidden;
+}
+
+i[data-lucide] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* --- 1. SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #F7F8F5, #EDF0EA);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border-right: 1px solid rgba(29, 92, 74, 0.105);
+  z-index: 100;
+  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 45px;
+  margin-bottom: 25px;
+}
+
+#toggle-sidebar-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  transition: all 0.2s;
+}
+
+#toggle-sidebar-btn:hover {
+  color: var(--text-light);
+  background: rgba(29, 92, 74, 0.105);
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap; /* Impede que o texto quebre linha durante a transição */
+}
+
+.sidebar nav a:hover {
+  background: var(--bg-panel);
+  color: var(--text-light);
+}
+
+.sidebar nav a.active {
+  background: var(--primary-blue);
+  color: var(--white);
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(29, 92, 74, 0.21);
+}
+
+/* --- 2. ESTADO DA SIDEBAR FECHADA --- */
+.sidebar.hidden {
+  width: 88px;
+  padding: 20px 15px;
+}
+
+.sidebar.hidden .sidebar-header {
+  justify-content: center;
+}
+
+.sidebar.hidden nav a span,
+.sidebar.hidden .profile-info {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  margin-left: -15px; /* Ajuda a esconder o texto mais rápido */
+}
+
+.sidebar.hidden nav a {
+  justify-content: center;
+  padding: 14px;
+}
+
+.sidebar.hidden .profile-button {
+  justify-content: center;
+}
+
+/* --- 3. MENU DE PERFIL --- */
+.sidebar-bottom-menu {
+  border-top: 1px solid rgba(29, 92, 74, 0.105);
+  padding-top: 15px;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+  transition: background 0.3s;
+  overflow: hidden;
+}
+
+.profile-button:hover {
+  background: var(--bg-panel);
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--blue-light);
+  color: var(--bg-dark);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.profile-info .username {
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 15px;
+}
+
+.profile-info .email {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.profile-dropdown-sidebar {
+  position: absolute;
+  bottom: 80px;
+  left: 15px;
+  width: 230px;
+  background: #F4F6F1;
+  border-radius: 12px;
+  border: 1px solid rgba(29, 92, 74, 0.21);
+  box-shadow: 0 10px 30px rgba(27, 42, 37, 0.15);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 110;
+}
+
+.profile-dropdown-sidebar.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-header {
+  padding: 12px;
+  border-bottom: 1px solid rgba(29, 92, 74, 0.14);
+  margin-bottom: 8px;
+}
+
+.dropdown-header .username {
+  display: block;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.dropdown-header .email {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: rgba(29, 92, 74, 0.105);
+  color: var(--blue-light);
+}
+
+.dropdown-item.logout,
+.dropdown-item[style*="color: #f59e0b"] {
+  color: var(--danger);
+}
+
+.dropdown-item.logout:hover,
+.dropdown-item[style*="color: #f59e0b"]:hover {
+  background: rgba(194, 65, 45, 0.15);
+  color: var(--danger);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: rgba(29, 92, 74, 0.14);
+  margin: 8px 0;
+}
+
+/* --- 4. CONTEÚDO PRINCIPAL (MAIN) --- */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.main-header {
+  margin-bottom: 30px;
+}
+
+.main-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--blue-glow);
+  text-shadow: 0 0 12px rgba(29, 92, 74, 0.49);
+}
+
+.main-header p {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* --- 5. GRID DO DASHBOARD (RESTAURADO PARA O ORIGINAL DO USUÁRIO) --- */
+/* ================================================== */
+/* ===== CORREÇÃO DO GRID DO DASHBOARD ===== */
+/* ================================================== */
+
+.dashboard-grid {
+  display: grid;
+  /* Cria duas colunas: a primeira com 2 partes do espaço, a segunda com 1 parte */
+  grid-template-columns: 2fr 1fr; 
+  gap: 30px;
+  align-items: start;
+}
+
+/* Define que o painel de avisos ocupa a primeira coluna */
+#class-panel {
+  grid-column: 1 / 2;
+}
+
+/* Define que a coluna da direita (com calendário e notas) ocupa a segunda coluna */
+.right-column {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* REGRA INTELIGENTE: Se o painel de avisos estiver escondido... */
+.dashboard-grid:has(#class-panel[style*="display: none"]) .right-column {
+  /* ...a coluna da direita passa a ocupar a primeira (e única) coluna. */
+  grid-column: 1 / 2;
+}
+
+
+/* --- 6. ITENS DO GRID (WIDGETS) --- */
+.grid-item {
+  background: var(--bg-panel);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(29, 92, 74, 0.14);
+  box-shadow: 0 0 15px rgba(29, 92, 74, 0.105);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blue-light);
+  text-shadow: 0 0 6px var(--blue-glow);
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 10px;
+  max-height: 400px;
+}
+
+.notice-card {
+  border: 1px solid rgba(29, 92, 74, 0.14);
+  border-radius: 12px;
+  padding: 16px;
+  background: #F4F6F1;
+  box-shadow: 0 0 12px rgba(29, 92, 74, 0.14);
+}
+
+.notice-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--blue-light);
+}
+
+.notice-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.notice-card .meta {
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.mini-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: var(--text-light);
+}
+
+.mini-calendar-header button {
+  background: none;
+  border: none;
+  color: var(--blue-glow);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.mini-calendar-header button:hover {
+  background: rgba(29, 92, 74, 0.14);
+}
+
+.mini-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue-light);
+  margin-bottom: 8px;
+}
+
+.mini-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.mini-day {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  color: var(--text-muted);
+}
+
+.mini-day.current-month {
+  color: var(--text-light);
+}
+
+.mini-day.today {
+  background-color: var(--blue-light);
+  color: var(--bg-dark);
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(29, 92, 74, 0.35);
+}
+
+.mini-day:not(.empty):hover {
+  background: rgba(29, 92, 74, 0.14);
+  cursor: pointer;
+}
+
+.view-all-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid var(--blue-light);
+  color: var(--blue-light);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.view-all-btn:hover {
+  background: var(--blue-light);
+  color: var(--bg-dark);
+  box-shadow: 0 0 12px var(--blue-light);
+}
+
+.mini-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.mini-note-card {
+  background: #F4F6F1;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+}
+
+.mini-note-card h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-note-card p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* --- 7. MODAIS E BOTÃO FAB --- */
+/* Estilos para o modal de entrada de turma */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(27, 42, 37, 0.4);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  display: flex; /* Centraliza o conteúdo */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+  background: var(--bg-panel);
+  padding: 24px;
+  border: 1px solid rgba(29, 92, 74, 0.21);
+  width: 90%;
+  max-width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(29, 92, 74, 0.21);
+  text-align: left; /* Alinha o texto à esquerda para formulários */
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(29, 92, 74, 0.14);
+}
+
+.modal-header h4 {
+  font-size: 18px;
+  color: var(--blue-light);
+  text-shadow: 0 0 6px var(--blue-glow); /* Adiciona brilho ao título */
+}
+
+.close-btn {
+  color: var(--text-muted);
+  font-size: 28px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: var(--text-light);
+}
+
+.modal p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+#class-code-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(29, 92, 74, 0.21);
+  outline: none;
+  background: #F4F6F1;
+  color: var(--white);
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#class-code-input:focus {
+  border-color: var(--blue-light);
+  box-shadow: 0 0 10px rgba(29, 92, 74, 0.35);
+}
+
+.modal-actions {
+  text-align: right;
+}
+
+.btn-save {
+  padding: 10px 20px;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-save:hover {
+  background: var(--blue-light);
+  box-shadow: 0 0 12px var(--blue-light);
+}
+
+.fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  background: var(--primary-blue);
+  color: white;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(29, 92, 74, 0.42);
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 999;
+}
+
+.fab:hover {
+  background: var(--blue-light);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(29, 92, 74, 0.49);
+}
+
+.fab i {
+  width: 24px;
+  height: 24px;
+}
+
+/* Estilos para os modais personalizados (showAlert, showConfirm) */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(27, 42, 37, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.custom-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.custom-modal {
+  background: linear-gradient(145deg, #F4F6F1, #FFFFFF); /* Gradiente sutil */
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid var(--blue-light); /* Borda mais proeminente */
+  box-shadow: 0 10px 30px rgba(27, 42, 37, 0.18), 0 0 60px rgba(29, 92, 74, 0.28); /* Sombra mais profunda e brilho */
+  width: 90%;
+  max-width: 450px; /* Aumentado um pouco o max-width */
+  text-align: center;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Espaçamento entre título, texto e botões */
+  position: relative; /* Para o pseudo-elemento */
+  overflow: hidden; /* Garante que o pseudo-elemento não vaze */
+}
+
+/* Pseudo-elemento para um efeito de brilho sutil no fundo */
+.custom-modal::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(29, 92, 74, 0.07) 0%, transparent 70%);
+  transform: rotate(45deg);
+  opacity: 0.5;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-modal-overlay.show .custom-modal {
+  transform: scale(1);
+}
+
+.custom-modal-title {
+  font-size: 28px; /* Aumentado o tamanho da fonte */
+  color: var(--blue-light);
+  font-weight: 800; /* Mais negrito */
+  text-shadow: 0 0 15px var(--blue-glow); /* Brilho mais intenso */
+  margin-bottom: 0;
+  position: relative; /* Para ficar acima do pseudo-elemento */
+  z-index: 1;
+}
+
+.custom-modal-text {
+  font-size: 17px; /* Aumentado um pouco o tamanho da fonte */
+  color: var(--text-light); /* Texto mais claro */
+  line-height: 1.7;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.custom-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Aumentado o espaçamento entre os botões */
+  margin-top: 15px; /* Mais margem acima dos botões */
+  position: relative;
+  z-index: 1;
+}
+
+.custom-modal-buttons button {
+  padding: 14px 32px; /* Aumentado o padding */
+  border: none;
+  border-radius: 10px; /* Bordas mais arredondadas */
+  cursor: pointer;
+  font-weight: 700; /* Mais negrito */
+  font-size: 17px; /* Aumentado o tamanho da fonte */
+  transition: all 0.3s ease-in-out;
+  min-width: 120px; /* Garante um tamanho mínimo maior */
+  letter-spacing: 0.5px; /* Pequeno espaçamento entre letras */
+}
+
+.custom-modal-buttons .btn-primary {
+  background: var(--primary-blue);
+  color: white;
+  box-shadow: 0 5px 20px rgba(29, 92, 74, 0.28); /* Sombra para o botão primário */
+}
+
+.custom-modal-buttons .btn-primary:hover {
+  background: var(--blue-light);
+  box-shadow: 0 0 20px var(--blue-light), 0 0 30px rgba(29, 92, 74, 0.42); /* Brilho mais intenso no hover */
+  transform: translateY(-2px); /* Efeito de leve elevação */
+}
+
+.custom-modal-buttons .btn-secondary {
+  background: #D5DBD3;
+  color: var(--text-light);
+  border: 1px solid rgba(29, 92, 74, 0.21); /* Borda sutil para o secundário */
+}
+
+.custom-modal-buttons .btn-secondary:hover {
+  background: #B9C2BB;
+  box-shadow: 0 0 15px rgba(27, 42, 37, 0.12); /* Sombra no hover */
+  transform: translateY(-2px); /* Efeito de leve elevação */
+}
+

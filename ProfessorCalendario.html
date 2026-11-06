@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaEdu - Calendário do Professor</title>
+  <script src="js/lucide.min.js"></script>
+  <!-- Usaremos um CSS dedicado para esta página -->
+  <link rel="stylesheet" href="css/ProfessorCalendario.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+<!-- =============================================== -->
+<!-- ===== SIDEBAR ===== -->
+<!-- =============================================== -->
+<div class="sidebar">
+  <div class="sidebar-main-navigation">
+    <div class="sidebar-header">
+      <button id="toggle-sidebar-btn"><i data-lucide="menu"></i></button>
+    </div>
+    <nav>
+      <!-- Link para o Painel -->
+      <a href="PainelProfessor.html"><i data-lucide="layout-dashboard"></i> <span>Painel</span></a>
+      <!-- Link do Calendário está ativo -->
+      <a href="ProfessorCalendario.html" class="active"><i data-lucide="calendar-check"></i> <span>Calendário</span></a>
+      <!-- Link para Gerenciar Avisos (se for uma página separada ) -->
+      <a href="GerenciarAvisos.html"><i data-lucide="megaphone"></i> <span>Gerenciar Avisos</span></a>
+    </nav>
+  </div>
+  <div id="profile-menu-container" class="sidebar-bottom-menu">
+    <button id="profile-menu-button" class="profile-button">
+      <span class="profile-avatar"></span>
+      <div class="profile-info">
+        <span class="username">Carregando...</span>
+        <span class="email"></span>
+      </div>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown-sidebar">
+      <div class="dropdown-header">
+        <span class="username"></span>
+        <span class="email"></span>
+      </div>
+      <a href="EditarPerfilProfessor.html" class="dropdown-item"><i data-lucide="user-cog"></i><span>Editar Perfil</span></a>
+      <a href="ConfiguracoesProfessor.html" class="dropdown-item"><i data-lucide="settings"></i><span>Configurações</span></a>
+      <div class="dropdown-divider"></div>
+      <a href="#" class="dropdown-item logout"><i data-lucide="log-out"></i><span>Sair</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================== -->
+<!-- ===== CONTEÚDO PRINCIPAL ===== -->
+<!-- =============================================== -->
+<div class="main">
+    <header class="main-header">
+      <h1>Calendário Acadêmico</h1>
+      <p>Crie e gerencie eventos para suas turmas.</p>
+    </header>
+    <div class="panel">
+      <div class="calendar-wrapper">
+        <div class="calendar">
+          <div class="calendar-header">
+            <button id="prev-month"><i data-lucide="chevron-left"></i></button>
+            <div class="month-year" id="month-year">Carregando...</div>
+            <button id="next-month"><i data-lucide="chevron-right"></i></button>
+          </div>
+          <div class="weekdays">
+            <div>dom</div><div>seg</div><div>ter</div><div>qua</div><div>qui</div><div>sex</div><div>sab</div>
+          </div>
+          <div class="days" id="calendar-days">
+            <!-- Os dias do calendário serão inseridos aqui pelo JavaScript -->
+          </div>
+        </div>
+      </div>
+      <div class="events-wrapper">
+        <div class="events">
+          <h3 id="events-title">Eventos do dia</h3>
+          <button class="add-event-btn" id="add-event-btn"><i data-lucide="plus"></i> Novo Evento</button>
+          <div class="event-list" id="event-list">
+            <!-- Os cards de eventos do dia serão inseridos aqui pelo JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- =============================================== -->
+<!-- ===== MODAIS ===== -->
+<!-- =============================================== -->
+<div id="event-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h4 id="event-modal-title">Novo Evento</h4>
+    <form id="event-form">
+      <input type="hidden" id="event-id-input">
+      <div class="form-group">
+        <label for="event-title-input">Título do Evento</label>
+        <input type="text" id="event-title-input" required>
+      </div>
+      <div class="form-group">
+        <label for="event-turma-select">Turma</label>
+        <select id="event-turma-select" required>
+            <!-- Opções de turma serão inseridas aqui pelo JavaScript -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="event-date-input">Data</label>
+        <input type="date" id="event-date-input" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel">Cancelar</button>
+        <button type="submit" class="btn-save">Salvar Evento</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Usaremos um script dedicado para esta página -->
+<script type="module" src="js/ProfessorCalendario.js"></script>
+<div class="demo-badge" role="note">Demonstração: os dados ficam só neste navegador
+  <a href="PainelAluno.html" style="color:#fff">Ver como aluno</a>
+  <button type="button" onclick="localStorage.removeItem('alphaedu-demo-db-v1');location.reload()">Recomeçar</button>
+</div>
+</body>
+</html>

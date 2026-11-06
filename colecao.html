@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaEdu - Coleções de Flashcards</title>
+    <script src="js/lucide.min.js"></script>
+    <link rel="stylesheet" href="css/styleColecao.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+<!-- ===== NOVA SIDEBAR (PADRÃO DO PROJETO ) ===== -->
+<div class="sidebar">
+  <div class="sidebar-main-navigation">
+    <div class="sidebar-header">
+      <button id="toggle-sidebar-btn"><i data-lucide="menu"></i></button>
+    </div>
+    <nav>
+      <a href="PainelAluno.html"><i data-lucide="layout-dashboard"></i> <span>Painel</span></a>
+      <a href="cronometro.html"><i data-lucide="timer"></i> <span>Cronômetro</span></a>
+      <a href="calendario.html"><i data-lucide="calendar"></i> <span>Calendário</span></a>
+      <a href="bloco_de_notas.html"><i data-lucide="notebook-pen"></i> <span>Bloco de Notas</span></a>
+      <a href="arquivos.html"><i data-lucide="folder-archive"></i> <span>Meus Arquivos</span></a>
+      <a href="colecao.html" class="active"><i data-lucide="layers"></i> <span>Flashcards</span></a>
+    </nav>
+  </div>
+  <div id="profile-menu-container" class="sidebar-bottom-menu">
+    <button id="profile-menu-button" class="profile-button">
+      <span class="profile-avatar"></span>
+      <div class="profile-info">
+        <span class="username">Carregando...</span>
+        <span class="email"></span>
+      </div>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown-sidebar">
+      <div class="dropdown-header"><span class="username"></span><span class="email"></span></div>
+      <a href="perfil.html" class="dropdown-item"><i data-lucide="user-cog"></i><span>Editar Perfil</span></a>
+      <a href="configuracao.html" class="dropdown-item"><i data-lucide="settings"></i><span>Configurações</span></a>
+      <div class="dropdown-divider"></div>
+      <a href="#" id="leave-class-btn" class="dropdown-item" style="color: #f59e0b; display: none;"><i data-lucide="user-x"></i><span>Sair da Turma</span></a>
+      <a href="index.html" class="dropdown-item logout"><i data-lucide="log-out"></i><span>Sair</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- Conteúdo Principal -->
+<div class="main">
+    <header class="main-header">
+        <h1>Minhas Coleções de Flashcards</h1>
+        <p>Crie, gerencie e estude suas coleções de flashcards.</p>
+    </header>
+
+    <div class="panel">
+        <div class="toolbar">
+            <div class="search-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="search-input" class="search-input" placeholder="Buscar coleções...">
+            </div>
+            <button id="add-collection-btn" class="btn-primary"><i data-lucide="plus"></i> Nova Coleção</button>
+        </div>
+        <div id="collections-grid" class="collections-grid">
+            <!-- As coleções serão inseridas aqui pelo JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Nova/Editar Coleção -->
+<div id="collection-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 id="modal-title">Nova Coleção</h4>
+            <button id="close-modal-btn" class="close-btn">&times;</button>
+        </div>
+        <form id="collection-form">
+            <div class="form-group">
+                <label for="collection-name">Nome da Coleção</label>
+                <input type="text" id="collection-name" placeholder="Ex: Biologia Celular" required>
+            </div>
+            <div class="form-group">
+                <label for="collection-description">Descrição (Opcional)</label>
+                <textarea id="collection-description" rows="3" placeholder="Ex: Capítulos 1 a 3 do livro"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="cancel-btn" class="btn-secondary">Cancelar</button>
+                <button type="submit" class="btn-save">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de Confirmação de Exclusão -->
+<div id="confirm-delete-modal" class="modal">
+    <div class="modal-content" style="max-width: 450px;">
+        <div class="modal-header">
+            <h4>Confirmar Exclusão</h4>
+            <button id="close-confirm-modal-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <i data-lucide="alert-triangle" class="confirm-icon"></i>
+            <p id="confirm-modal-text">Você tem certeza que deseja excluir este item? Esta ação não pode ser desfeita.</p>
+        </div>
+        <div class="modal-actions">
+            <button type="button" id="cancel-delete-btn" class="btn-secondary">Cancelar</button>
+            <button type="button" id="confirm-delete-btn" class="btn-danger">Sim, Excluir</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="js/scriptColecao.js"></script>
+
+<div class="demo-badge" role="note">Demonstração: os dados ficam só neste navegador
+  <a href="PainelProfessor.html" style="color:#fff">Ver como professor</a>
+  <button type="button" onclick="localStorage.removeItem('alphaedu-demo-db-v1');location.reload()">Recomeçar</button>
+</div>
+</body>
+</html>

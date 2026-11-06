@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaEdu - Bloco de Notas</title>
+  <script src="js/lucide.min.js"></script>
+  <link rel="stylesheet" href="css/styleNotas.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+
+<!-- ===== NOVA SIDEBAR (PADRÃO DO PROJETO ) ===== -->
+<div class="sidebar">
+  <div class="sidebar-main-navigation">
+    <div class="sidebar-header">
+      <button id="toggle-sidebar-btn"><i data-lucide="menu"></i></button>
+    </div>
+    <nav>
+      <a href="PainelAluno.html"><i data-lucide="layout-dashboard"></i> <span>Painel</span></a>
+      <a href="cronometro.html"><i data-lucide="timer"></i> <span>Cronômetro</span></a>
+      <a href="calendario.html"><i data-lucide="calendar"></i> <span>Calendário</span></a>
+      <a href="bloco_de_notas.html" class="active"><i data-lucide="notebook-pen"></i> <span>Bloco de Notas</span></a>
+      <a href="arquivos.html"><i data-lucide="folder-archive"></i> <span>Meus Arquivos</span></a>
+      <a href="colecao.html"><i data-lucide="layers"></i> <span>Flashcards</span></a>
+    </nav>
+  </div>
+  <div id="profile-menu-container" class="sidebar-bottom-menu">
+    <button id="profile-menu-button" class="profile-button">
+      <span class="profile-avatar"></span>
+      <div class="profile-info">
+        <span class="username">Carregando...</span>
+        <span class="email"></span>
+      </div>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown-sidebar">
+      <div class="dropdown-header"><span class="username"></span><span class="email"></span></div>
+      <a href="perfil.html" class="dropdown-item"><i data-lucide="user-cog"></i><span>Editar Perfil</span></a>
+      <a href="configuracao.html" class="dropdown-item"><i data-lucide="settings"></i><span>Configurações</span></a>
+      <div class="dropdown-divider"></div>
+      <a href="#" id="leave-class-btn" class="dropdown-item" style="color: #f59e0b; display: none;"><i data-lucide="user-x"></i><span>Sair da Turma</span></a>
+      <a href="index.html" class="dropdown-item logout"><i data-lucide="log-out"></i><span>Sair</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- Conteúdo Principal -->
+<div class="main">
+  <header class="main-header">
+    <h1>Bloco de Notas</h1>
+    <p>Capture suas ideias, anotações de aula e lembretes importantes.</p>
+  </header>
+
+  <div class="panel">
+    <div class="toolbar">
+      <div class="search-container">
+        <i class="search-icon" data-lucide="search"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar notas...">
+      </div>
+      <button id="newNoteBtn" class="new-note-btn">
+        <i data-lucide="plus"></i>
+        <span>Nova Nota</span>
+      </button>
+    </div>
+    <div id="notesContainer" class="notes-container">
+      <!-- As notas serão inseridas aqui pelo JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Nova/Editar Nota -->
+<div id="noteModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Nova Nota</h2>
+      <button id="closeModal" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" id="noteTitleInput" placeholder="Título da nota" required>
+      <textarea id="noteContentInput" rows="10" placeholder="Digite sua nota aqui..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelBtn" class="btn-cancel">Cancelar</button>
+      <button id="saveNoteBtn" class="btn-save">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Confirmação de Exclusão -->
+<div id="deleteModal" class="modal">
+  <div class="modal-content" style="max-width: 450px;">
+    <div class="modal-header">
+      <h2>Confirmar Exclusão</h2>
+      <button id="closeDeleteModal" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+      <p>Tem certeza que deseja excluir esta nota? Esta ação não pode ser desfeita.</p>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelDeleteBtn" class="btn-cancel">Cancelar</button>
+      <button id="confirmDeleteBtn" class="btn-save">Sim, Excluir</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/scriptNotas.js"></script>
+
+<div class="demo-badge" role="note">Demonstração: os dados ficam só neste navegador
+  <a href="PainelProfessor.html" style="color:#fff">Ver como professor</a>
+  <button type="button" onclick="localStorage.removeItem('alphaedu-demo-db-v1');location.reload()">Recomeçar</button>
+</div>
+</body>
+</html>

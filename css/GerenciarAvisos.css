@@ -1,0 +1,21 @@
+/* Estilos específicos para a seção Avisos */
+.toolbar { display: flex; gap: 16px; margin-bottom: 24px; align-items: center; }
+.search-container { flex: 1; position: relative; }
+.search-input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid var(--panel-border); border-radius: 8px; font-size: 15px; background: #F4F6F1; color: var(--text-light); transition: all 0.3s; }
+.search-input:focus { outline: none; border-color: var(--blue-light); box-shadow: 0 0 10px rgba(29, 92, 74, 0.35); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+.btn-primary { background: var(--primary-blue); color: var(--white); border: none; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+.btn-primary:hover { background: var(--blue-light); box-shadow: 0 0 12px var(--blue-light); }
+
+.avisos-list { display: flex; flex-direction: column; gap: 16px; }
+.aviso-card { background: #F4F6F1; border: 1px solid var(--panel-border); border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.aviso-card-content h4 { font-size: 17px; font-weight: 600; color: var(--text-light); margin-bottom: 4px; }
+.aviso-card-content .meta { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+.aviso-card-content p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+.aviso-actions { display: flex; gap: 8px; }
+.aviso-actions button { background: none; border: none; padding: 6px; cursor: pointer; color: var(--text-muted); display: flex; border-radius: 50%; transition: all 0.2s; }
+.aviso-actions button:hover { background-color: rgba(29, 92, 74, 0.14); color: var(--blue-light); }
+.aviso-actions .delete-btn:hover { color: var(--danger-hover); background-color: rgba(194, 65, 45, 0.2); }
+
+/* Os estilos de modal foram removidos daqui, pois já estão definidos em PainelProfessor.css */
+

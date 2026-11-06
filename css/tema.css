@@ -1,0 +1,83 @@
+/* Tema AlphaEdu — carregado depois do CSS de cada página.
+   Ideia: caderno de estudos. Papel claro, tinta verde-escura, marca-texto amarelo
+   só onde algo está "marcado" (página atual, dia de hoje, item selecionado). */
+
+@font-face { font-family: 'Bricolage Grotesque'; src: url('../fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+
+:root {
+  --ink: #1B2A25;
+  --forest: #1D5C4A;
+  --paper: #EDF0EA;
+  --sheet: #FFFFFF;
+  --marker: #F3DA4B;
+  --rule: rgba(27, 42, 37, 0.12);
+}
+
+* { font-family: 'Bricolage Grotesque', system-ui, sans-serif; text-shadow: none !important; }
+
+body { background: var(--paper) !important; color: var(--ink); }
+
+h1, h2, h3, h4, .main-header h1, .panel-header h3, .modal-header h4 {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.main-header h1 { font-size: clamp(26px, 3vw, 34px); font-weight: 700; }
+.main-header p { color: var(--text-muted); }
+
+/* Barra lateral: folha branca com a "marca" do produto no topo */
+.sidebar { background: var(--sheet) !important; border-right: 1px solid var(--rule); }
+.sidebar-header::before {
+  content: 'AlphaEdu';
+  font: 700 21px/1 'Bricolage Grotesque', sans-serif;
+  color: var(--forest);
+  margin-right: auto;
+}
+.sidebar.hidden .sidebar-header::before { display: none; }
+
+.sidebar nav a { color: var(--text-muted); border-radius: 6px; }
+.sidebar nav a:hover { background: var(--paper); color: var(--ink); }
+/* página atual = marcada com marca-texto */
+.sidebar nav a.active {
+  background: linear-gradient(transparent 12%, var(--marker) 12%, var(--marker) 88%, transparent 88%);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+.panel, .modal-content {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+.profile-avatar { background: var(--forest) !important; color: #fff !important; }
+
+/* Botões: tinta sólida, cantos discretos */
+button, .btn-primary, .btn-save { border-radius: 6px; }
+.btn-primary, .btn-save { background: var(--forest); color: #fff; box-shadow: none; }
+.btn-primary:hover, .btn-save:hover { background: #164A3B; box-shadow: none; transform: none; }
+
+input, textarea, select { color: var(--ink); }
+input::placeholder, textarea::placeholder { color: #7D8A84; }
+
+:focus-visible { outline: 2px solid var(--forest) !important; outline-offset: 2px; }
+
+/* Hoje e selecionado no calendário: marca-texto */
+.day.today, .mini-day.today, .calendar-dates div.today {
+  background: var(--marker) !important; color: var(--ink) !important; box-shadow: none !important;
+}
+.day.selected, .calendar-dates div.selected { background: var(--forest) !important; color: #fff !important; box-shadow: none !important; }
+
+/* Aviso fixo de demonstração */
+.demo-badge {
+  position: fixed; right: 16px; bottom: 16px; z-index: 999;
+  display: flex; gap: 10px; align-items: center;
+  background: var(--ink); color: #fff; font-size: 13px;
+  padding: 8px 8px 8px 14px; border-radius: 999px;
+}
+.demo-badge button {
+  background: var(--marker); color: var(--ink); border: 0; font-weight: 700;
+  padding: 6px 12px; border-radius: 999px; cursor: pointer; font-size: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

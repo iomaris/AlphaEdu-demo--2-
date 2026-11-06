@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaEdu - Gerenciar Avisos</title>
+  <script src="js/lucide.min.js"></script>
+  <link rel="stylesheet" href="css/PainelProfessor.css"> <!-- Usando o CSS global para o sidebar e estilos base -->
+  <link rel="stylesheet" href="css/GerenciarAvisos.css">
+  <link rel="stylesheet" href="css/tema.css"> <!-- CSS específico para avisos -->
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-main-navigation">
+    <div class="sidebar-header">
+      <button id="toggle-sidebar-btn"><i data-lucide="menu"></i></button>
+    </div>
+     <nav>
+      <a href="PainelProfessor.html" ><i data-lucide="layout-dashboard"></i> <span>Painel</span></a>
+      <a href="ProfessorCalendario.html"><i data-lucide="calendar"></i> <span>Calendário</span></a>
+      <a href="GerenciarAvisos.html" class="active"><i data-lucide="megaphone"></i> <span>Gerenciar Avisos</span></a>
+    </nav>
+  </div>
+  <div id="profile-menu-container" class="sidebar-bottom-menu">
+    <button id="profile-menu-button" class="profile-button">
+      <span id="profile-avatar" class="profile-avatar"></span>
+      <div class="profile-info">
+        <span id="profile-username" class="username">Carregando...</span>
+        <span id="profile-email" class="email"></span>
+      </div>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown-sidebar">
+      <div class="dropdown-header">
+        <span id="dropdown-username" class="username"></span>
+        <span id="dropdown-email" class="email"></span>
+      </div>
+      <a href="EditarPerfilProfessor.html" class="dropdown-item"><i data-lucide="user-cog"></i><span>Editar Perfil</span></a>
+      <a href="ConfiguracoesProfessor.html" class="dropdown-item"><i data-lucide="settings"></i><span>Configurações</span></a>
+      <div class="dropdown-divider"></div>
+      <a href="#" id="logout-btn" class="dropdown-item logout"><i data-lucide="log-out"></i><span>Sair</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- Conteúdo Principal -->
+<div class="main">
+  <section id="avisos">
+    <header class="main-header">
+      <h1>Gerenciar Avisos</h1>
+      <p>Crie, edite e visualize os avisos para os alunos.</p>
+    </header>
+    <div class="panel">
+      <div class="toolbar">
+        <div class="search-container">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="search" id="search-avisos" class="search-input" placeholder="Buscar avisos...">
+        </div>
+        <button id="add-aviso-btn" class="btn-primary"><i data-lucide="plus"></i> Novo Aviso</button>
+      </div>
+      <div id="avisos-list" class="avisos-list"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Modal para Criar/Editar Aviso -->
+<div id="aviso-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="aviso-modal-title">Novo Aviso</h2>
+        <form id="aviso-form">
+            <input type="hidden" id="aviso-id-input">
+            <label for="aviso-title">Título do Aviso:</label>
+            <input type="text" id="aviso-title" required>
+            <label for="aviso-text">Conteúdo:</label>
+            <textarea id="aviso-text" rows="5" required></textarea>
+            <label for="aviso-turma">Selecione a Turma:</label>
+            <select id="aviso-turma" required></select>
+            <button type="submit" class="btn-primary">Publicar Aviso</button>
+        </form>
+    </div>
+</div>
+
+<script type="module" src="js/GerenciarAvisos.js"></script>
+<div class="demo-badge" role="note">Demonstração: os dados ficam só neste navegador
+  <a href="PainelAluno.html" style="color:#fff">Ver como aluno</a>
+  <button type="button" onclick="localStorage.removeItem('alphaedu-demo-db-v1');location.reload()">Recomeçar</button>
+</div>
+</body>
+</html>

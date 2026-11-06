@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaEdu — organize seus estudos</title>
+  <meta name="description" content="Calendário, cronômetro Pomodoro, flashcards, bloco de notas e avisos da turma em um só lugar. Demonstração aberta, sem cadastro.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231D5C4A'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23F3DA4B' font-family='sans-serif' font-weight='700'>α</text></svg>">
+  <link rel="stylesheet" href="css/styleInicial.css">
+</head>
+<body>
+
+  <header class="topo">
+    <a href="#" class="marca">AlphaEdu</a>
+    <nav aria-label="Seções">
+      <a href="#recursos">Recursos</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a href="PainelAluno.html" class="btn btn-tinta btn-pequeno">Abrir demonstração</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-texto">
+        <h1>Seus estudos e os avisos da turma num lugar só.</h1>
+        <p class="lead">O AlphaEdu junta calendário, cronômetro Pomodoro, flashcards e bloco de notas. O professor publica provas e avisos, e eles aparecem no painel de cada aluno.</p>
+        <div class="acoes">
+          <a href="PainelAluno.html" class="btn btn-tinta">Entrar como aluno</a>
+          <a href="PainelProfessor.html" class="btn btn-contorno">Entrar como professor</a>
+        </div>
+        <p class="nota">Demonstração aberta, sem cadastro. O que você criar fica salvo só no seu navegador.</p>
+      </div>
+
+      <div class="hero-cartao">
+        <button class="ficha" id="ficha" type="button" aria-live="polite" aria-label="Flashcard: clique para virar">
+          <span class="ficha-face ficha-frente">
+            <span class="ficha-materia" id="ficha-materia">Biologia</span>
+            <span class="ficha-texto" id="ficha-pergunta">Qual organela produz a energia da célula?</span>
+          </span>
+          <span class="ficha-face ficha-verso">
+            <span class="ficha-materia">Resposta</span>
+            <span class="ficha-texto"><mark id="ficha-resposta">A mitocôndria, pela respiração celular.</mark></span>
+          </span>
+        </button>
+        <div class="ficha-controles">
+          <span id="ficha-dica">Clique no cartão para ver a resposta</span>
+          <button type="button" id="ficha-proxima" class="btn-link">Próximo cartão</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos" class="recursos">
+      <h2 class="titulo-secao">O que dá pra fazer</h2>
+
+      <article class="recurso">
+        <div class="recurso-texto">
+          <h3>Painel do aluno</h3>
+          <p>Ao abrir o AlphaEdu você vê os avisos da sua turma, o mês no calendário e as últimas anotações. Para entrar numa turma, basta o código que o professor passar.</p>
+          <a href="PainelAluno.html" class="btn-link">Abrir o painel</a>
+        </div>
+        <figure class="tela"><img src="imagens/telas/painel.webp" alt="Painel do aluno com avisos da turma, minicalendário e últimas notas" loading="lazy" width="1920" height="1200"></figure>
+      </article>
+
+      <article class="recurso">
+        <div class="recurso-texto">
+          <h3>Calendário</h3>
+          <p>Marque provas, entregas e compromissos. As datas com eventos ganham um ponto, e o dia de hoje fica destacado.</p>
+          <a href="calendario.html" class="btn-link">Abrir o calendário</a>
+        </div>
+        <figure class="tela"><img src="imagens/telas/calendario.webp" alt="Calendário mensal com eventos marcados" loading="lazy" width="1920" height="1200"></figure>
+      </article>
+
+      <article class="recurso">
+        <div class="recurso-texto">
+          <h3>Cronômetro Pomodoro</h3>
+          <p>Estude em blocos de 25 minutos com pausas entre eles. Dá para mudar a duração ou usar como temporizador comum.</p>
+          <a href="cronometro.html" class="btn-link">Abrir o cronômetro</a>
+        </div>
+        <figure class="tela"><img src="imagens/telas/cronometro.webp" alt="Cronômetro Pomodoro marcando 25 minutos" loading="lazy" width="1920" height="1200"></figure>
+      </article>
+
+      <article class="recurso">
+        <div class="recurso-texto">
+          <h3>Flashcards</h3>
+          <p>Monte coleções por matéria, revise cartão por cartão e embaralhe quando quiser se testar de verdade.</p>
+          <a href="colecao.html" class="btn-link">Abrir os flashcards</a>
+        </div>
+        <figure class="tela"><img src="imagens/telas/flashcards.webp" alt="Tela de estudo de flashcards de Biologia" loading="lazy" width="1920" height="1200"></figure>
+      </article>
+
+      <article class="recurso">
+        <div class="recurso-texto">
+          <h3>Bloco de notas</h3>
+          <p>Resumos, fórmulas e lembretes ficam guardados e podem ser buscados pelo título ou pelo conteúdo.</p>
+          <a href="bloco_de_notas.html" class="btn-link">Abrir o bloco de notas</a>
+        </div>
+        <figure class="tela"><img src="imagens/telas/notas.webp" alt="Bloco de notas com dois resumos" loading="lazy" width="1920" height="1200"></figure>
+      </article>
+
+      <article class="recurso recurso-professor">
+        <div class="recurso-texto">
+          <h3>Para o professor</h3>
+          <p>Crie turmas, compartilhe o código com os alunos e publique avisos de prova, reposição ou falta. Os eventos entram no calendário da turma.</p>
+          <a href="PainelProfessor.html" class="btn-link">Entrar como professor</a>
+        </div>
+        <figure class="tela"><img src="imagens/telas/avisos.webp" alt="Tela de gerenciamento de avisos do professor" loading="lazy" width="1920" height="1200"></figure>
+      </article>
+    </section>
+
+    <section id="equipe" class="equipe">
+      <h2 class="titulo-secao">Quem fez</h2>
+      <p class="equipe-intro">Projeto desenvolvido por estudantes do Instituto Federal do Amazonas.</p>
+      <ul class="equipe-lista">
+        <li><img src="imagens/homem.avif" alt="" loading="lazy"><strong>Jonatas Maciel</strong><span>Scrum Master</span></li>
+        <li><img src="imagens/homem1.jpg" alt="" loading="lazy"><strong>Guilherme Grillo</strong><span>Dev. Front-End</span></li>
+        <li><img src="imagens/homem2.jpg" alt="" loading="lazy"><strong>Marcus Zorzetti</strong><span>Dev. Front-End</span></li>
+        <li><img src="imagens/mulher.jpg" alt="" loading="lazy"><strong>Mariana Cardoso</strong><span>Dev. Full Stack</span></li>
+        <li><img src="imagens/homem3.avif" alt="" loading="lazy"><strong>Sérgio Nina</strong><span>Dev. Back-End</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer id="contato" class="rodape">
+    <div class="rodape-sobre">
+      <span class="marca">AlphaEdu</span>
+      <p>Queremos facilitar a organização dos estudos e aproximar professores e alunos no dia a dia da turma.</p>
+      <p>Instituto Federal do Amazonas</p>
+    </div>
+    <div class="rodape-contato">
+      <h2>Contato</h2>
+      <p><a href="tel:+5592993618244">+55 92 99361-8244</a></p>
+      <p><a href="mailto:alfaedu.team@gmail.com">alfaedu.team@gmail.com</a></p>
+      <p><a href="https://instagram.com/projetoalphaedu" target="_blank" rel="noopener">Instagram @projetoalphaedu</a></p>
+    </div>
+    <p class="rodape-copy">© 2025 Projeto AlphaEdu</p>
+  </footer>
+
+  <script src="js/scriptInicial.js"></script>
+</body>
+</html>
